@@ -1,0 +1,8 @@
+- name: Add vault ca
+  ansible.builtin.copy:
+    dest: /usr/local/share/ca-certificates/vault.crt
+    content: "{{ lookup('file', 'certificates/vault.crt') }}"
+
+- name: Update certificate store
+  ansible.builtin.shell:
+    cmd: update-ca-certificates

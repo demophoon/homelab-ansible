@@ -1,0 +1,10 @@
+- name: Provision VM
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - import_tasks: tasks/users.yml
+    - import_tasks: tasks/ca.yml
+    - import_tasks: tasks/repos.yml
+    - import_tasks: tasks/packages.yml
+    - import_tasks: tasks/ssh.yml

@@ -1,0 +1,32 @@
+- name: Add Tailscale Key
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', 'public_keys/repos/tailscale.gpg') }}"
+- name: Add Hashicorp Key
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', 'public_keys/repos/hashicorp.gpg') }}"
+- name: Add Docker Key
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', 'public_keys/repos/docker.gpg') }}"
+- name: Add Crownsec Key
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', 'public_keys/repos/crowdsec.gpg') }}"
+- name: Add Envoy Key
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', 'public_keys/repos/envoy.gpg') }}"
+
+
+- name: Add Tailscale Repo
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://pkgs.tailscale.com/stable/ubuntu jammy main
+- name: Add Hashicorp Repo
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://apt.releases.hashicorp.com jammy main
+- name: Add Docker Repo
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+- name: Add Crowdsec Repo
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://packagecloud.io/crowdsec/crowdsec/ubuntu jammy main
+- name: Add Envoy Repo
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://apt.envoyproxy.io jammy main

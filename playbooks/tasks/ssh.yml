@@ -1,0 +1,9 @@
+- name: Setup sshd Config
+  ansible.builtin.copy:
+    dest: /etc/ssh/sshd_config
+    content: "{{ lookup('file', 'files/ssh/sshd_config') }}"
+
+- name: Setup trusted ca
+  ansible.builtin.copy:
+    dest: /etc/ssh/ca.pem
+    content: "{{ lookup('file', 'files/ssh/trusted_ca.pem') }}"

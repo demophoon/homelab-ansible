@@ -1,0 +1,25 @@
+- name: Add britt user
+  ansible.builtin.user:
+    name: britt
+    append: true
+    groups:
+      - wheel
+    #password: "$6$b/Uz.gnAWxZP.$MmYPCl1ytwajanhoSHbUdtlwvWdTNOiv5ebiPfm9Pb7v3C2eFZ8E98WIK1u2836vNoFiKjt9GezXKar99CPPZ0"
+
+- name: Add yk5 ssh key to britt user
+  ansible.posix.authorized_key:
+    user: britt
+    key: "{{ lookup('file', 'public_keys/yk5.pub') }}"
+
+- name: Add stratum ssh key to britt user
+  ansible.posix.authorized_key:
+    user: britt
+    key: "{{ lookup('file', 'public_keys/stratum.pub') }}"
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) ALL'
+    validate: 'visudo -cf %s'
